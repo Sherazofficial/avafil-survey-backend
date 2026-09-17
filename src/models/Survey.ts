@@ -4,6 +4,7 @@ export interface ISurvey extends Document {
   patientName?: string;
   age?: number;
   region?: string;
+  dateCompleted?: string;
   language: 'en' | 'ur';
   answers: number[];
   totalScore: number;
@@ -15,6 +16,7 @@ const SurveySchema: Schema = new Schema({
   patientName: { type: String, required: true },
   age: { type: Number, required: true },
   region: { type: String, required: true },
+  dateCompleted: { type: String, required: true },
   language: { type: String, enum: ['en', 'ur'], required: true },
   answers: {
     type: [Number],

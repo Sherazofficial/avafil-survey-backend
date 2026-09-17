@@ -15,10 +15,10 @@ const getSeverity = (score: number): string => {
 
 export const submitSurvey = async (req: Request, res: Response) => {
   try {
-    const { patientName, age, region, language, answers } = req.body;
+    const { patientName, age, region, dateCompleted, language, answers } = req.body;
 
-    if (!patientName || !age || !region || !language || !answers || !Array.isArray(answers) || answers.length !== 5) {
-      return res.status(400).json({ message: 'Invalid data provided. Please ensure Patient Name, Age, Region and all 5 answers are submitted.' });
+    if (!patientName || !age || !region || !dateCompleted || !language || !answers || !Array.isArray(answers) || answers.length !== 5) {
+      return res.status(400).json({ message: 'Invalid data provided. Please ensure Patient Name, Age, Region, Date Completed, and all 5 answers are submitted.' });
     }
 
     const totalScore = answers.reduce((sum, current) => sum + current, 0);
@@ -43,6 +43,7 @@ export const submitSurvey = async (req: Request, res: Response) => {
         patientName,
         age,
         region,
+        dateCompleted,
         language,
         answers,
         totalScore,
