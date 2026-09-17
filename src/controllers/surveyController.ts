@@ -24,7 +24,19 @@ export const submitSurvey = async (req: Request, res: Response) => {
     const totalScore = answers.reduce((sum, current) => sum + current, 0);
     const severity = getSeverity(totalScore);
 
-    let savedId = `local-${Date.now()}`;
+    // Wait for connection if it's currently connecting
+    if (mongoose.connection.readyState === 2) {
+      // connecting, wait a bit or just await a quick ping
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    }
+    
+    // If not connected, try to connect now
+    if (mongoose.connection.readyState === 0) {
+      const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/avafil-survey';
+      await mongoose.connect(mongoURI);
+    }
+
+    let savedId = '';
     
     if (mongoose.connection.readyState === 1) {
       const newSurvey = new Survey({
@@ -36,6 +48,7 @@ export const submitSurvey = async (req: Request, res: Response) => {
         totalScore,
         severity
       });
+      
       const savedSurvey = await newSurvey.save();
       savedId = savedSurvey._id.toString();
     } else {
