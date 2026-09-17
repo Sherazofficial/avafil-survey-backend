@@ -1,0 +1,70 @@
+[
+  {
+    "_id": "local-1789622131754",
+    "patientName": "test",
+    "age": 30,
+    "region": "Lahore",
+    "language": "ur",
+    "answers": [
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "totalScore": 25,
+    "severity": "No ED",
+    "createdAt": "2026-09-17T05:15:31.755Z"
+  },
+  {
+    "_id": "local-1789622189524",
+    "patientName": "Test UR",
+    "age": 30,
+    "region": "Lahore",
+    "language": "ur",
+    "answers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "totalScore": 15,
+    "severity": "Mild to Moderate ED",
+    "createdAt": "2026-09-17T05:16:29.524Z"
+  },
+  {
+    "_id": "local-1789622276362",
+    "patientName": "test",
+    "age": 30,
+    "region": "Lahore",
+    "language": "ur",
+    "answers": [
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "totalScore": 25,
+    "severity": "No ED",
+    "createdAt": "2026-09-17T05:17:56.362Z"
+  },
+  {
+    "_id": "local-1789622287983",
+    "patientName": "Test EN",
+    "age": 30,
+    "region": "Lahore",
+    "language": "en",
+    "answers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "totalScore": 15,
+    "severity": "Mild to Moderate ED",
+    "createdAt": "2026-09-17T05:18:07.983Z"
+  }
+]

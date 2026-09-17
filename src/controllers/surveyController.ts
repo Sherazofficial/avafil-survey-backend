@@ -15,10 +15,10 @@ const getSeverity = (score: number): string => {
 
 export const submitSurvey = async (req: Request, res: Response) => {
   try {
-    const { patientName, dateOfBirth, language, answers } = req.body;
+    const { patientName, age, region, language, answers } = req.body;
 
-    if (!patientName || !language || !answers || !Array.isArray(answers) || answers.length !== 5) {
-      return res.status(400).json({ message: 'Invalid data provided. Please ensure Patient Name and all 5 answers are submitted.' });
+    if (!patientName || !age || !region || !language || !answers || !Array.isArray(answers) || answers.length !== 5) {
+      return res.status(400).json({ message: 'Invalid data provided. Please ensure Patient Name, Age, Region and all 5 answers are submitted.' });
     }
 
     const totalScore = answers.reduce((sum, current) => sum + current, 0);
@@ -29,7 +29,8 @@ export const submitSurvey = async (req: Request, res: Response) => {
     if (mongoose.connection.readyState === 1) {
       const newSurvey = new Survey({
         patientName,
-        dateOfBirth,
+        age,
+        region,
         language,
         answers,
         totalScore,
@@ -39,7 +40,7 @@ export const submitSurvey = async (req: Request, res: Response) => {
       savedId = savedSurvey._id.toString();
     } else {
       // Fallback to local file if DB is down
-      const data = { _id: savedId, patientName, dateOfBirth, language, answers, totalScore, severity, createdAt: new Date() };
+      const data = { _id: savedId, patientName, age, region, language, answers, totalScore, severity, createdAt: new Date() };
       const fallbackFile = path.join(__dirname, '../../surveys.json');
       let existing = [];
       if (fs.existsSync(fallbackFile)) {

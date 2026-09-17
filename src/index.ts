@@ -22,6 +22,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Avafil Survey Platform Backend is running');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
+
+export default app;
+// Trigger dev server reload
